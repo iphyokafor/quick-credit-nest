@@ -1,8 +1,4 @@
-import {
-  BadRequestException,
-  Injectable,
-  NotFoundException,
-} from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { LoginDto } from '../users/dto/login.dto';
@@ -20,13 +16,11 @@ export class AuthService {
     const user = await this.usersService.findOneByEmail(username);
     if (!user) {
       return null;
-      // throw new BadRequestException('Unable to login!');
     }
 
     const match = await this.comparePassword(pass, user.password);
     if (!match) {
       return null;
-      // throw new BadRequestException('Unable to login!');
     }
 
     const { password, ...result } = user['dataValues'];
