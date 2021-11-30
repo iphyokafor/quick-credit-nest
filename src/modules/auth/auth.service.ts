@@ -29,7 +29,7 @@ export class AuthService {
 
   public async login(user: LoginDto) {
     const token = await this.generateToken(user);
-    return { user, token };
+    return { status: 200, data: user, token };
   }
 
   public async create(user: UserDto) {
@@ -41,7 +41,7 @@ export class AuthService {
 
     const token = await this.generateToken(result);
 
-    return { user: result, token };
+    return { status: 201, data: result, token };
   }
 
   private async generateToken(user) {
